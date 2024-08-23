@@ -16,6 +16,7 @@ class Contact
 public:
 	std::string	getField(int index);
 	void		readFromCin();
+	void		print_inarr(int display_index);
 	void		print();
 private:
 	std::string fields[5];
