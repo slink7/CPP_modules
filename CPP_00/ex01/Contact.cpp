@@ -55,7 +55,7 @@ void Contact::print_inarr(int display_index) {
 
 void Contact::print() {
 	std::cout
-		<< fields[FIRST_NAME] << " " << fields[LAST_NAME] << " (" << fields[NICKNAME] << ")\n"
-		<< fields[PHONE] << "\n"
-		<< fields[SECRET] << "\n";
+		<< "Name: " << fields[FIRST_NAME] << " " << fields[LAST_NAME] << " (" << fields[NICKNAME] << ")\n"
+		<< "Phone: " << fields[PHONE] << "\n"
+		<< "Secret: " << fields[SECRET] << "\n";
 }
