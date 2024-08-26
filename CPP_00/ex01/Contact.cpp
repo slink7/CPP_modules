@@ -13,8 +13,24 @@ std::string	Contact::getField(int index) {
 	return (fields[index]);
 }
 
+std::string		Contact::superCin(std::string prompt) {
+	std::string	out;
+
+	std::cout << prompt;
+	do {
+		std::cin >> out;
+		if (std::cin.fail() || out.length() < 1)
+		{
+			std::cin.clear();
+			continue;
+		}
+	} while (0);
+	return (out);
+}
+
 void		Contact::readFromCin() {
 	std::cout << "Enter first name : ";
+
 	std::cin >> fields[FIRST_NAME];
 	std::cout << "Enter last name : ";
 	std::cin >> fields[LAST_NAME];
@@ -31,7 +47,7 @@ void print_10(std::string str)
 	int	stri = 0;
 	for (int k = 0; k < 10; k++)
 	{
-		if ((10 - k) > str.length())
+		if ((10 - k) > (int)str.length())
 			std::cout << ' ';
 		else if (k == 9 && str.length() > 10)
 			std::cout << '.';

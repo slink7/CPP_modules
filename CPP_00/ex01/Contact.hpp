@@ -15,6 +15,7 @@ class Contact
 {
 public:
 	std::string	getField(int index);
+	std::string superCin(std::string prompt);
 	void		readFromCin();
 	void		print_inarr(int display_index);
 	void		print();
