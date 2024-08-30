@@ -1,10 +1,23 @@
 #include <iostream>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 
 #include "Account.hpp"
 
 std::string get_date()
 {
-	return ("");
+    std::time_t now = std::time(0);
+    std::tm* localTime = std::localtime(&now);
+    std::ostringstream oss;
+    oss << (localTime->tm_year + 1900)
+        << std::setw(2) << std::setfill('0') << (localTime->tm_mon + 1)
+        << std::setw(2) << std::setfill('0') << localTime->tm_mday
+        << "_"
+        << std::setw(2) << std::setfill('0') << localTime->tm_hour
+        << std::setw(2) << std::setfill('0') << localTime->tm_min
+        << std::setw(2) << std::setfill('0') << localTime->tm_sec;
+    return oss.str();
 }
 
 int Account::_nbAccounts = 0;
