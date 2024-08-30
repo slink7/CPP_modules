@@ -1,5 +1,5 @@
 all:
-	g++ megaphone.cpp -o megaphone
+	g++ -Wall -Wextra -Werror -std=c++98 megaphone.cpp -o megaphone
 
 clean:
 
