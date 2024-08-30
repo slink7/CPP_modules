@@ -1,2 +1,7 @@
 all:
-	g++ megaphone.cpp
+	g++ megaphone.cpp -o megaphone
+
+clean:
+
+fclean:
+	rm ./megaphone
