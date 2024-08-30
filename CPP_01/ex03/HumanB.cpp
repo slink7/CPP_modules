@@ -5,13 +5,13 @@
 
 HumanB::HumanB(std::string name) {
 	_name = name;
-	_weapon = Weapon("");
+	_weapon = 0;
 }
 
-void HumanB::setWeapon(Weapon weapon) {
-	_weapon = weapon;
+void HumanB::setWeapon(Weapon& weapon) {
+	_weapon = &weapon;
 }
 
 void HumanB::attack() {
-	std::cout << _name << " attacks with " << _weapon.get_type() << "\n";
+	std::cout << _name << " attacks with " << _weapon->getType() << "\n";
 }
