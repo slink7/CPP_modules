@@ -1,5 +1,5 @@
 #ifndef ZOMBIE_HPP
-#define ZOMBIE_PP
+#define ZOMBIE_HPP
 
 #include <string>
 
