@@ -1,12 +1,13 @@
 #=== Project Config ===
 
-NAME = clap
+NAME = frag
 
 COMPILER = c++
 
 SRC = \
 	main.cpp\
 	ClapTrap.cpp\
+	FragTrap.cpp
 
 CFLAGS = -Wall -Werror -Wextra -g3
 LFLAGS =
