@@ -16,6 +16,12 @@ int main(int argc, char **argv) {
 	std::ifstream infile;
 	std::ofstream outfile;
 
+	if (from.length() < 1)
+	{
+		std::cout << "Invalid second argument\n";
+		return (1);
+	}
+
 	infile.open(file_name);
 	if (!infile.is_open())
 	{
@@ -37,7 +43,6 @@ int main(int argc, char **argv) {
 	int new_index = 0;
 
 	while (true) {
-		std::cout << new_index << "\n";
 		new_index = content.find(from, index);
 		if (new_index == -1)
 			break ;
