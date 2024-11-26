@@ -6,7 +6,8 @@ COMPILER = c++
 
 SRC = \
 	main.cpp\
-	Zombie.cpp
+	Zombie.cpp\
+	zombieHorde.cpp
 
 CFLAGS = -Wall -Werror -Wextra -g3
 LFLAGS = -lpthread
