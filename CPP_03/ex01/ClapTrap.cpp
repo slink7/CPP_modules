@@ -7,6 +7,7 @@ ClapTrap::ClapTrap() {
 	hit_points = 10;
 	energy = 10;
 	attack_damage = 10;
+	std::cout << " Default ClapTrap enters the fight !\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
