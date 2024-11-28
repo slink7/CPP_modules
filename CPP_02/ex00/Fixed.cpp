@@ -9,16 +9,16 @@ Fixed::Fixed() {
 	bits = 0;
 }
 
-Fixed::Fixed(Fixed& cpy) {
+Fixed::Fixed(const Fixed& cpy) {
 	std::cout << "Copy constructor called\n";
-	bits = cpy.getRawBits();
+	*this = cpy;
 }
 
 Fixed::~Fixed() {
 	std::cout << "Destructor called\n";
 }
 
-Fixed&	Fixed::operator=(Fixed& cpy) {
+const Fixed&	Fixed::operator=(const Fixed& cpy) {
 	std::cout << "Copy assignment operator called\n";
 	bits = cpy.getRawBits();
 	return (*this);
