@@ -13,5 +13,6 @@ FragTrap::~FragTrap() {
 }
 
 void FragTrap::highFivesGuys() {
-	std::cout << "<" << name << "> Who's up for a high five ??\n";
+	if (hit_points > 0)
+		std::cout << "<" << name << "> Who's up for a high five ??\n";
 }

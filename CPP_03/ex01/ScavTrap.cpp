@@ -26,5 +26,6 @@ void ScavTrap::attack(const std::string &target) {
 }
 
 void ScavTrap::guardGate() {
-	std::cout << "<" << name << "> Entering gate guarding mode.\n";
+	if (hit_points > 0)
+		std::cout << "<" << name << "> Entering gate guarding mode.\n";
 }
