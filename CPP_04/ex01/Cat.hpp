@@ -12,7 +12,7 @@ public:
 
 	const Cat& operator=(const Cat& other);
 
-	void	makeSound();
+	void	makeSound() const;
 private:
 	Brain	*brain;
 };

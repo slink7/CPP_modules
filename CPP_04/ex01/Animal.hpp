@@ -13,7 +13,7 @@ public:
 
 	Animal &operator=(const Animal& cpy);
 
-	virtual void	makeSound();
+	virtual void	makeSound() const;
 	std::string		getType() const;
 protected:
 	std::string type;
