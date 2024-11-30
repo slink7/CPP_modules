@@ -1,13 +1,15 @@
 #=== Project Config ===
 
-NAME = frag
+NAME = diamond
 
 COMPILER = c++
 
 SRC = \
 	main.cpp\
 	ClapTrap.cpp\
-	FragTrap.cpp
+	FragTrap.cpp\
+	ScavTrap.cpp\
+	DiamondTrap.cpp
 
 CFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 LFLAGS =
