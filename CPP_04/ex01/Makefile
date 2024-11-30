@@ -11,7 +11,7 @@ SRC = \
 	Dog.cpp\
 	Brain.cpp
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 LFLAGS =
 
 INCLUDES =\

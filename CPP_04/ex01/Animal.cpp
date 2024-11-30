@@ -1,13 +1,21 @@
 #include "Animal.hpp"
 
-Animal::Animal() {
-	type = "Animal";
+Animal::Animal() :
+	type("Animal")
+{
 	std::cout << "Created Animal\n";
 }
 
-Animal::Animal(const Animal &cpy) {
-	type = cpy.getType();
+Animal::Animal(const Animal &cpy) :
+	type(cpy.getType())
+{
 	std::cout << "Copied Animal\n";
+}
+
+Animal::Animal(const std::string& type) :
+	type(type)
+{
+	std::cout << "Created Animal " << type << "\n";
 }
 
 Animal::~Animal() {
@@ -21,7 +29,7 @@ Animal &Animal::operator=(const Animal &other)
 	return (*this);
 }
 
-void Animal::makeSound() const {
+void Animal::makeSound() {
 	std::cout << "*Animal sound*\n";
 }
 

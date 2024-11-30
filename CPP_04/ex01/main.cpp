@@ -5,12 +5,19 @@
 
 int main() {
 
-	std::cout << "\nTESTS A =================\n\n";
-	{
-		Cat B;
-		Cat D = B;
+	const int N = 4;
 
-		B.makeSound();
-		D.makeSound();
+	Animal* zoo[N];
+	for (int k = 0; k < N; k++) {
+		if (k % 2)
+			zoo[k] = new Cat();
+		else
+			zoo[k] = new Dog();
 	}
+
+	for (int k = 0; k < N; k++)
+		zoo[k]->makeSound();
+	
+	for (int k = 0; k < N; k++)
+		delete (zoo[k]);
 }
