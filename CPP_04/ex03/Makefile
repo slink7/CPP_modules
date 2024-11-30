@@ -6,10 +6,11 @@ COMPILER = c++
 
 SRC = \
 	main.cpp\
+	AMateria.cpp\
 	Character.cpp\
 	Cure.cpp\
 	Ice.cpp\
-	MateriaSource.cpp
+	MateriaSource.cpp\
 
 CFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 LFLAGS =

@@ -1,6 +1,8 @@
 #ifndef MATERIASOURCE_HPP
 #define MATERIASOURCE_HPP
 
+#include <cstring>
+
 #include "IMateriaSource.hpp"
 
 #define MAX_MATERIAS 10
