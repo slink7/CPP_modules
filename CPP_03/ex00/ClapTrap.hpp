@@ -1,6 +1,7 @@
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
+#include <iostream>
 #include <string>
 
 class ClapTrap {
@@ -20,7 +21,7 @@ public:
 	int					getHitPoints() const;
 	int					getEnergy() const;
 	int					getAttackDamage() const;
-private:
+protected:
 	std::string	name;
 	int			hit_points;
 	int			energy;
