@@ -7,9 +7,10 @@ COMPILER = c++
 SRC = \
 	main.cpp\
 	ClapTrap.cpp\
+	ScavTrap.cpp\
 	FragTrap.cpp
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 LFLAGS =
 
 INCLUDES =\

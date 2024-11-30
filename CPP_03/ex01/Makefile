@@ -9,7 +9,7 @@ SRC = \
 	ClapTrap.cpp\
 	ScavTrap.cpp\
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 LFLAGS =
 
 INCLUDES =\
