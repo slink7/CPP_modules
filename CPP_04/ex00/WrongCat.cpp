@@ -9,6 +9,6 @@ WrongCat::~WrongCat() {
 	std::cout << "Destroyed WrongCat\n";
 }
 
-void	WrongCat::makeSound() const {
-	std::cout << "*musique triste* Meow meow meow meow\n";
-}
+// void	WrongCat::makeSound() const {
+// 	std::cout << "*musique triste* Meow meow meow meow\n";
+// }

@@ -12,7 +12,7 @@ SRC = \
 	WrongAnimal.cpp\
 	WrongCat.cpp
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 LFLAGS =
 
 INCLUDES =\
