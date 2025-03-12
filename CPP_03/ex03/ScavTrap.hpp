@@ -11,12 +11,12 @@ public:
 	ScavTrap();
 	ScavTrap(const ScavTrap& other);
 	ScavTrap(const std::string& name);
-	~ScavTrap();
+	virtual ~ScavTrap();
 
 	ScavTrap&	operator=(const ScavTrap& other);
 
-	void	attack(const std::string& target);
-	void	guardGate();
+	virtual void	attack(const std::string& target);
+	void			guardGate();
 };
 
 #endif
