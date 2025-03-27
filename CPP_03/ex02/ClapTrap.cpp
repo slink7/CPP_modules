@@ -4,7 +4,7 @@ ClapTrap::ClapTrap() :
 	name("John"),
 	hit_points(10),
 	energy(10),
-	attack_damage(10)
+	attack_damage(0)
 {
 	std::cout << "Default ClapTrap created.\n";
 }
@@ -22,7 +22,7 @@ ClapTrap::ClapTrap(const std::string& name) :
 	name(name),
 	hit_points(10),
 	energy(10),
-	attack_damage(10)
+	attack_damage(0)
 {
 	std::cout << "ClapTrap " << name << " has been created !\n";
 }
