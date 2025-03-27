@@ -21,7 +21,7 @@ public:
 	int					getHitPoints() const;
 	int					getEnergy() const;
 	int					getAttackDamage() const;
-protected:
+private:
 	std::string	name;
 	int			hit_points;
 	int			energy;
