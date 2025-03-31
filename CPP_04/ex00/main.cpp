@@ -20,6 +20,10 @@ int main() {
 
 		C.makeSound();
 		D.makeSound();
+
+		Animal *E = new Dog();
+		((Dog*)E)->makeSound();
+		E->makeSound();
 	}
 	std::cout << "\nTESTS B =================\n\n";
 	{

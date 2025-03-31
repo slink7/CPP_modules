@@ -20,4 +20,9 @@ int main() {
 	
 	for (int k = 0; k < N; k++)
 		delete (zoo[k]);
+
+	
+	Animal *E = new Dog();
+	E->makeSound();
+	delete E;
 }
