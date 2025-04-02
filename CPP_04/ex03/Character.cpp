@@ -1,15 +1,32 @@
 #include "Character.hpp"
 
-Character::Character(const std::string &name):
-	name(name),
-	inventory()
+Character::Character(const Character &other)
+{
+	*this = other;
+}
+
+Character::Character() :
+	name("Noname")
+{}
+
+Character::Character(const std::string &name) : name(name),
+                                                inventory()
 {
 	for (int k = 0; k < INVENTORY_SIZE; k++)
-		inventory[k] = 0;
+	inventory[k] = 0;
 }
 
 Character::~Character()
 {}
+
+Character &Character::operator=(const Character &cpy)
+{
+	name = cpy.name;
+	for (int k = 0; k < INVENTORY_SIZE; k++) {
+		inventory[k] = cpy.inventory[k];
+	}
+	return (*this);
+}
 
 std::string const &Character::getName() const {
 	return (name);
