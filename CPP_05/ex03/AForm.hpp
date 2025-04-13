@@ -7,6 +7,7 @@ class AForm;
 
 #include "Bureaucrat.hpp"
 
+
 class AForm {
 public:
 
@@ -25,7 +26,7 @@ public:
 	AForm();
 	AForm(const AForm& other);
 	AForm(const std::string& name, int sign_requirement, int exec_requirement, const std::string& target);
-	~AForm();
+	virtual ~AForm();
 
 	AForm&	operator=(const AForm& other);
 
