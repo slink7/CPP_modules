@@ -52,8 +52,7 @@ void Bureaucrat::checkGrade() const {
 		throw (GradeTooLowException());
 }
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureacrat)
-{
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureacrat) {
     os << bureacrat.getName() << ", bureaucrat grade " << bureacrat.getGrade();
     return os;
 }
