@@ -4,6 +4,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
 	AForm("Shrubbery Creation", 145, 137, target)
 {}
 
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
+
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 
 	if (executor.getGrade() > getExecRequirement())

@@ -4,6 +4,8 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string& target) :
 	AForm("Presidential Pardon", 25, 5, target)
 {}
 
+PresidentialPardonForm::~PresidentialPardonForm() {}
+
 void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
 	if (executor.getGrade() > getExecRequirement())
 		throw (GradeTooLowException());

@@ -8,33 +8,31 @@
 
 #include "Intern.hpp"
 
-int main() {
+void test(const std::string& bname, int bgrade, const std::string& fname, const std::string& target) {
+	Bureaucrat	bureaucrat(bname, bgrade);
+	Intern		intern;
+	AForm		*form = intern.makeForm(fname, target);
 
-	Intern	someGuy;
-	AForm	*form;
+	if (!form) {
+		std::cout << "Wrong form name (robo, shrub, pardon)...\n";
+		return ;
+	}
 
-	form = someGuy.makeForm("robo", "Paul");
-
-	if (!form)
-		return (0);
-
-	Bureaucrat	jhon("Lennon", 1);
-
-	jhon.signForm(*form);
-	jhon.executeForm(*form);
-	
-	std::cout << "A\n";
-	delete (form); // SEGFAULT
-	std::cout << "B\n";
-	form = someGuy.makeForm("shrub", "Daniel");
-
-	std::cout << "C\n";
-
-	if (!form)
-		return (0);
-
-	jhon.signForm(*form);
-	jhon.executeForm(*form);
+	bureaucrat.signForm(*form);
+	bureaucrat.executeForm(*form);
 
 	delete (form);
+}
+
+
+int main() {
+
+	std::cout << "\n";
+	test("Hidalgo", 50, "shrub", "Paris");
+	std::cout << "\n";
+	test("Bob", 1, "pardon", "Daniel");
+	std::cout << "\n\n";
+	test("Einstein", 25, "robo", "Dr. Emmett Brown");
+	std::cout << "\n";
+
 }

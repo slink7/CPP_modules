@@ -4,6 +4,8 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string& target) :
 	AForm("Robotomy Request", 72, 45, target)
 {}
 
+RobotomyRequestForm::~RobotomyRequestForm() {}
+
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	if (executor.getGrade() > getExecRequirement())
