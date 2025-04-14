@@ -55,8 +55,8 @@ std::string StrTrim(const std::string &str, const std::string &set) {
 	return (str.substr(begin, end - begin + 1));
 }
 
-namespace ft
-{
+namespace ft {
+
 	bool	is_float(const std::string& input) {
 		return (
 			input == "+inff" || input == "-inff" || input == "nanf" || (
@@ -67,20 +67,6 @@ namespace ft
 				)
 			)
 		);
-	}
-
-	float	stof(const std::string& input) {
-		if (input == "nanf")
-			return (_NANF);
-		if (input == "+inff")
-			return (_POS_INFF);
-		if (input == "-inff")
-			return (_NEG_INFF);
-		std::istringstream	stream(input);
-		float				out;
-		stream >> out;
-		std::cout << "value:" << out << "\n"; 
-		return (out);
 	}
 
 	bool	is_double(const std::string& input) {
@@ -95,20 +81,6 @@ namespace ft
 		);
 	}
 
-	double	stod(const std::string& input) {
-		if (input == "nan")
-			return (_NAN);
-		if (input == "+inf")
-			return (_POS_INF);
-		if (input == "-inf")
-			return (_NEG_INF);
-		std::istringstream	stream(input);
-		double				out;
-		stream >> out;
-		std::cout << "value:" << out << "\n"; 
-		return (out);
-	}
-
 	bool	is_int(const std::string& input) {
 		return (
 			input.find_first_not_of("-0123456789") == std::string::npos && (
@@ -118,22 +90,67 @@ namespace ft
 		);
 	}
 
-	int	stoi(const std::string& input) {
-		std::istringstream	stream(input);
-		int					out;
-		stream >> out;
-		std::cout << "value:" << out << "\n"; 
-		return (out);
+	bool	is_char(const std::string& input) {
+		return (input.length() == 1);
 	}
 }
 
-std::string	wrappedChar(char c) {
-	if (!isprint(c)) {
-		return ("Not displayable");
-	}
-	std::string out = "\000";
-	out[0] = c;
-	return (out);
+void	convertChar(const std::string& input) {
+	char c = input[0];
+	std::cout << "char: " << static_cast<char>(c) << ".\n";
+	std::cout << "int: " << static_cast<int>(c) << ".\n";
+	std::cout << "float: " << static_cast<float>(c) << "f.\n";
+	std::cout << "double: " << static_cast<double>(c) << ".\n";
+}
+
+void	convertInt(const std::string& input) {
+	int i = atoi(input.c_str());
+
+	if (i < 0 || i > 127)
+		std::cout << "char: impossible!\n";
+	else if (!isprint(i))
+		std::cout << "char: Not displayable\n";
+	else
+		std::cout << "char: " << static_cast<char>(i) << ".\n";
+	std::cout << "int: " << static_cast<int>(i) << ".\n";
+	std::cout << "float: " << static_cast<float>(i) << "f.\n";
+	std::cout << "double: " << static_cast<double>(i) << ".\n";
+}
+
+void	convertFloat(const std::string& input) {
+	float	f = atof(input.c_str());
+	char	c = static_cast<char>(f);
+
+	if (c < 0 || c > 127 || f == nanf(""))
+		std::cout << "char: impossible!\n";
+	else if (!isprint(c)) 
+		std::cout << "char: Not displayable\n";
+	else
+		std::cout << "char: " << c << "\n";
+	if (f > (float)0x7FFFFFFF || f < -(float)0x80000000 || f != f)
+		std::cout << "int: impossible!\n";
+	else
+		std::cout << "int: " << static_cast<int>(f) << "\n";
+	std::cout << "float: " << static_cast<float>(f) << "f.\n";
+	std::cout << "double: " << static_cast<double>(f) << ".\n";
+}
+
+void	convertDouble(const std::string& input) {
+	float	d = atof(input.c_str());
+	char	c = static_cast<char>(d);
+
+	if (c < 0 || c > 127 || d == nan(""))
+		std::cout << "char: impossible!\n";
+	else if (!isprint(c)) 
+		std::cout << "char: Not displayable\n";
+	else
+		std::cout << "char: " << c << "\n";
+	if (d > (double)0x7FFFFFFF || d < -(double)0x80000000 || d != d)
+		std::cout << "int: impossible!\n";
+	else
+		std::cout << "int: " << static_cast<int>(d) << "\n";
+	std::cout << "float: " << static_cast<float>(d) << "f.\n";
+	std::cout << "double: " << static_cast<double>(d) << ".\n";
 }
 
 
@@ -145,60 +162,25 @@ void ScalarConverter::convert(const std::string &scalar) {
 		return ;
 	}
 
-	Scalar base;
+	typedef	bool (*type_predicat)(const std::string&);
+	typedef	void (*converter)(const std::string&);
 
-	if (ft::is_float(clear_input)) {
-		base.type = FLOAT;
-		base.value.f = ft::stof(clear_input);	
-	} else if (ft::is_double(clear_input)) {
-		base.type = DOUBLE;
-		base.value.d = ft::stod(clear_input);
-	} else if (ft::is_int(clear_input)) {
-		base.type = INT;
-		base.value.i = ft::stoi(clear_input);
-	} else if (clear_input.size() == 1) {
-		base.type = CHAR;
-		base.value.c = clear_input.at(0);
+	struct map_entry {
+		type_predicat	predicat;
+		converter		converter;
+	};
+
+	struct map_entry predicat_map[] = {
+		{ft::is_char, convertChar},
+		{ft::is_int, convertInt},
+		{ft::is_float, convertFloat},
+		{ft::is_double, convertDouble},
+	};
+
+	for (int k = 0; k < 4; ++k) {
+		if (predicat_map[k].predicat(clear_input))
+			return predicat_map[k].converter(clear_input);
 	}
 
-	std::cout << "Input type: [" << base.type << "]." << getReadableType(base.type) << ".\n";
-
-	switch (base.type) {
-		case CHAR:
-			std::cout << "char: " << wrappedChar(static_cast<char>(base.value.c)) << ".\n";
-			std::cout << "int: " << static_cast<int>(base.value.c) << ".\n";
-			std::cout << "float: " << static_cast<float>(base.value.c) << "f.\n";
-			std::cout << "double: " << static_cast<double>(base.value.c) << ".\n";
-			break;
-		case INT:
-			std::cout << "char: " << wrappedChar(static_cast<char>(base.value.i)) << ".\n";
-			std::cout << "int: " << static_cast<int>(base.value.i) << ".\n";
-			std::cout << "float: " << static_cast<float>(base.value.i) << "f.\n";
-			std::cout << "double: " << static_cast<double>(base.value.i) << ".\n";
-			break;
-		case FLOAT:
-			if (base.value.f == _POS_INFF || base.value.f == _NEG_INFF || base.value.f == _NANF) {
-				std::cout << "char: impossible\n";
-				std::cout << "int: impossible\n";
-			} else {
-				std::cout << "char: " << wrappedChar(static_cast<char>(base.value.f)) << ".\n";
-				std::cout << "int: " << static_cast<int>(base.value.f) << ".\n";
-			}
-			std::cout << "float: " << static_cast<float>(base.value.f) << "f.\n";
-			std::cout << "double: " << static_cast<double>(base.value.f) << ".\n";
-			break;
-		case DOUBLE:
-			if (base.value.d == _POS_INF || base.value.d == _NEG_INF || base.value.d == _NAN) {
-				std::cout << "char: impossible\n";
-				std::cout << "int: impossible\n";
-			} else {
-				std::cout << "char: " << wrappedChar(static_cast<char>(base.value.d)) << ".\n";
-				std::cout << "int: " << static_cast<int>(base.value.d) << ".\n";
-			}
-			std::cout << "float: " << static_cast<float>(base.value.d) << "f.\n";
-			std::cout << "double: " << static_cast<double>(base.value.d) << ".\n";
-			break;
-		default:
-			std::cout << "Unknown type bruh\n";
-	}
+	std::cout << "Unknown input type...\n";
 }
