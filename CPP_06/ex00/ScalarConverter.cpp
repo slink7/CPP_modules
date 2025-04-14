@@ -127,6 +127,16 @@ namespace ft
 	}
 }
 
+std::string	wrappedChar(char c) {
+	if (!isprint(c)) {
+		return ("Not displayable");
+	}
+	std::string out = "\000";
+	out[0] = c;
+	return (out);
+}
+
+
 void ScalarConverter::convert(const std::string &scalar) {
 
 	std::string clear_input = StrTrim(scalar, " \t");
@@ -155,26 +165,36 @@ void ScalarConverter::convert(const std::string &scalar) {
 
 	switch (base.type) {
 		case CHAR:
-			std::cout << "char: " << static_cast<char>(base.value.c) << ".\n";
+			std::cout << "char: " << wrappedChar(static_cast<char>(base.value.c)) << ".\n";
 			std::cout << "int: " << static_cast<int>(base.value.c) << ".\n";
 			std::cout << "float: " << static_cast<float>(base.value.c) << "f.\n";
 			std::cout << "double: " << static_cast<double>(base.value.c) << ".\n";
 			break;
 		case INT:
-			std::cout << "char: " << static_cast<char>(base.value.i) << ".\n";
+			std::cout << "char: " << wrappedChar(static_cast<char>(base.value.i)) << ".\n";
 			std::cout << "int: " << static_cast<int>(base.value.i) << ".\n";
 			std::cout << "float: " << static_cast<float>(base.value.i) << "f.\n";
 			std::cout << "double: " << static_cast<double>(base.value.i) << ".\n";
 			break;
 		case FLOAT:
-			std::cout << "char: " << static_cast<char>(base.value.f) << ".\n";
-			std::cout << "int: " << static_cast<int>(base.value.f) << ".\n";
+			if (base.value.f == _POS_INFF || base.value.f == _NEG_INFF || base.value.f == _NANF) {
+				std::cout << "char: impossible\n";
+				std::cout << "int: impossible\n";
+			} else {
+				std::cout << "char: " << wrappedChar(static_cast<char>(base.value.f)) << ".\n";
+				std::cout << "int: " << static_cast<int>(base.value.f) << ".\n";
+			}
 			std::cout << "float: " << static_cast<float>(base.value.f) << "f.\n";
 			std::cout << "double: " << static_cast<double>(base.value.f) << ".\n";
 			break;
 		case DOUBLE:
-			std::cout << "char: " << static_cast<char>(base.value.d) << ".\n";
-			std::cout << "int: " << static_cast<int>(base.value.d) << ".\n";
+			if (base.value.d == _POS_INF || base.value.d == _NEG_INF || base.value.d == _NAN) {
+				std::cout << "char: impossible\n";
+				std::cout << "int: impossible\n";
+			} else {
+				std::cout << "char: " << wrappedChar(static_cast<char>(base.value.d)) << ".\n";
+				std::cout << "int: " << static_cast<int>(base.value.d) << ".\n";
+			}
 			std::cout << "float: " << static_cast<float>(base.value.d) << "f.\n";
 			std::cout << "double: " << static_cast<double>(base.value.d) << ".\n";
 			break;
