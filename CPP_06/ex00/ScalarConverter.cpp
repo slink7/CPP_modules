@@ -1,46 +1,7 @@
 #include "ScalarConverter.hpp"
-#include <limits>
 
-#define _NANF     (0.0f/0.0f)
-#define _POS_INFF (1.0f/0.0f)
-#define _NEG_INFF (-1.0f/0.0f)
-
-#define _NAN      (0.0/0.0)
-#define _POS_INF  (1.0/0.0)
-#define _NEG_INF  (-1.0/0.0)
-
-enum ScalarType {
-	UNKNOWN,
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE
-};
-
-const std::string&	getReadableType(ScalarType type) {
-	static std::string array[] = {
-		"UNKNOWN",
-		"CHAR",
-		"INT",
-		"FLOAT",
-		"DOUBLE"
-	};
-
-	if (type < 1 || type > 4)
-		return (array[0]);
-	else
-		return (array[type]);
-}
-
-struct Scalar {
-	ScalarType type;
-	union {
-		char c;
-		int i;
-		float f;
-		double d;
-	} value;
-};
+#define INT_MAXF 2147483647.0f
+#define INT_MINF -2147483648.0f
 
 std::string StrTrim(const std::string &str, const std::string &set) {
 
@@ -93,6 +54,12 @@ namespace ft {
 	bool	is_char(const std::string& input) {
 		return (input.length() == 1);
 	}
+
+	std::string	itos(int k) {
+		std::stringstream stream;
+		stream << k;
+		return (stream.str());
+	}
 }
 
 void	convertChar(const std::string& input) {
@@ -104,7 +71,8 @@ void	convertChar(const std::string& input) {
 }
 
 void	convertInt(const std::string& input) {
-	int i = atoi(input.c_str());
+	float	f = atof(input.c_str());
+	int		i = atoi(input.c_str());
 
 	if (i < 0 || i > 127)
 		std::cout << "char: impossible!\n";
@@ -112,9 +80,12 @@ void	convertInt(const std::string& input) {
 		std::cout << "char: Not displayable\n";
 	else
 		std::cout << "char: " << static_cast<char>(i) << ".\n";
-	std::cout << "int: " << static_cast<int>(i) << ".\n";
-	std::cout << "float: " << static_cast<float>(i) << "f.\n";
-	std::cout << "double: " << static_cast<double>(i) << ".\n";
+	if (input != ft::itos(i))
+		std::cout << "int: impossible!\n";
+	else 
+		std::cout << "int: " << static_cast<int>(i) << ".\n";
+	std::cout << "float: " << static_cast<float>(f) << "f.\n";
+	std::cout << "double: " << static_cast<double>(f) << ".\n";
 }
 
 void	convertFloat(const std::string& input) {
@@ -127,7 +98,7 @@ void	convertFloat(const std::string& input) {
 		std::cout << "char: Not displayable\n";
 	else
 		std::cout << "char: " << c << "\n";
-	if (f > (float)0x7FFFFFFF || f < -(float)0x80000000 || f != f)
+	if (f > INT_MAXF || f < INT_MINF || f != f)
 		std::cout << "int: impossible!\n";
 	else
 		std::cout << "int: " << static_cast<int>(f) << "\n";
@@ -145,7 +116,7 @@ void	convertDouble(const std::string& input) {
 		std::cout << "char: Not displayable\n";
 	else
 		std::cout << "char: " << c << "\n";
-	if (d > (double)0x7FFFFFFF || d < -(double)0x80000000 || d != d)
+	if (d > INT_MAXF || d < INT_MINF || d != d)
 		std::cout << "int: impossible!\n";
 	else
 		std::cout << "int: " << static_cast<int>(d) << "\n";
