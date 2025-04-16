@@ -64,10 +64,10 @@ namespace ft {
 
 void	convertChar(const std::string& input) {
 	char c = input[0];
-	std::cout << "char: " << static_cast<char>(c) << ".\n";
-	std::cout << "int: " << static_cast<int>(c) << ".\n";
-	std::cout << "float: " << static_cast<float>(c) << "f.\n";
-	std::cout << "double: " << static_cast<double>(c) << ".\n";
+	std::cout << "\e[0;36mchar: \e[0;32m'" << static_cast<char>(c) << "'\n";
+	std::cout << "\e[0;36mint: \e[0;32m" << static_cast<int>(c) << "\n";
+	std::cout << "\e[0;36mfloat: \e[0;32m" << static_cast<float>(c) << "f\n";
+	std::cout << "\e[0;36mdouble: \e[0;32m" << static_cast<double>(c) << "\n";
 }
 
 void	convertInt(const std::string& input) {
@@ -75,17 +75,17 @@ void	convertInt(const std::string& input) {
 	int		i = atoi(input.c_str());
 
 	if (i < 0 || i > 127)
-		std::cout << "char: impossible!\n";
+		std::cout << "\e[0;36mchar: \e[1;31mimpossible!\n";
 	else if (!isprint(i))
-		std::cout << "char: Not displayable\n";
+		std::cout << "\e[0;36mchar: \e[1;31mNot displayable\n";
 	else
-		std::cout << "char: " << static_cast<char>(i) << ".\n";
+		std::cout << "\e[0;36mchar: \e[0;32m'" << static_cast<char>(i) << "'\n";
 	if (input != ft::itos(i))
-		std::cout << "int: impossible!\n";
+		std::cout << "\e[0;36mint: \e[1;31mimpossible!\n";
 	else 
-		std::cout << "int: " << static_cast<int>(i) << ".\n";
-	std::cout << "float: " << static_cast<float>(f) << "f.\n";
-	std::cout << "double: " << static_cast<double>(f) << ".\n";
+		std::cout << "\e[0;36mint: \e[0;32m" << static_cast<int>(i) << "\n";
+	std::cout << "\e[0;36mfloat: \e[0;32m" << static_cast<float>(f) << "f\n";
+	std::cout << "\e[0;36mdouble: \e[0;32m" << static_cast<double>(f) << "\n";
 }
 
 void	convertFloat(const std::string& input) {
@@ -93,17 +93,17 @@ void	convertFloat(const std::string& input) {
 	char	c = static_cast<char>(f);
 
 	if (c < 0 || c > 127 || f == nanf(""))
-		std::cout << "char: impossible!\n";
+		std::cout << "\e[0;36mchar: \e[1;31mimpossible!\n";
 	else if (!isprint(c)) 
-		std::cout << "char: Not displayable\n";
+		std::cout << "\e[0;36mchar: \e[1;31mNot displayable\n";
 	else
-		std::cout << "char: " << c << "\n";
+		std::cout << "\e[0;36mchar: \e[0;32m'" << c << "'\n";
 	if (f > INT_MAXF || f < INT_MINF || f != f)
-		std::cout << "int: impossible!\n";
+		std::cout << "\e[0;36mint: \e[1;31mimpossible!\n";
 	else
-		std::cout << "int: " << static_cast<int>(f) << "\n";
-	std::cout << "float: " << static_cast<float>(f) << "f.\n";
-	std::cout << "double: " << static_cast<double>(f) << ".\n";
+		std::cout << "\e[0;36mint: \e[0;32m" << static_cast<int>(f) << "\n";
+	std::cout << "\e[0;36mfloat: \e[0;32m" << static_cast<float>(f) << "f\n";
+	std::cout << "\e[0;36mdouble: \e[0;32m" << static_cast<double>(f) << "\n";
 }
 
 void	convertDouble(const std::string& input) {
@@ -111,17 +111,17 @@ void	convertDouble(const std::string& input) {
 	char	c = static_cast<char>(d);
 
 	if (c < 0 || c > 127 || d == nan(""))
-		std::cout << "char: impossible!\n";
+		std::cout << "\e[0;36mchar: \e[1;31mimpossible!\n";
 	else if (!isprint(c)) 
-		std::cout << "char: Not displayable\n";
+		std::cout << "\e[0;36mchar: \e[1;31mNot displayable\n";
 	else
-		std::cout << "char: " << c << "\n";
+		std::cout << "\e[0;36mchar: \e[0;32m'" << c << "'\n";
 	if (d > INT_MAXF || d < INT_MINF || d != d)
-		std::cout << "int: impossible!\n";
+		std::cout << "\e[0;36mint: \e[1;31mimpossible!\n";
 	else
-		std::cout << "int: " << static_cast<int>(d) << "\n";
-	std::cout << "float: " << static_cast<float>(d) << "f.\n";
-	std::cout << "double: " << static_cast<double>(d) << ".\n";
+		std::cout << "\e[0;36mint: \e[0;32m" << static_cast<int>(d) << "\n";
+	std::cout << "\e[0;36mfloat: \e[0;32m" << static_cast<float>(d) << "f\n";
+	std::cout << "\e[0;36mdouble: \e[0;32m" << static_cast<double>(d) << "\n";
 }
 
 
@@ -129,7 +129,7 @@ void ScalarConverter::convert(const std::string &scalar) {
 
 	std::string clear_input = StrTrim(scalar, " \t");
 	if (clear_input.size() < 1) {
-		std::cout << "Invalid input.\n";
+		std::cout << "\e[1;31mInvalid input\n";
 		return ;
 	}
 
@@ -153,5 +153,5 @@ void ScalarConverter::convert(const std::string &scalar) {
 			return predicat_map[k].converter(clear_input);
 	}
 
-	std::cout << "Unknown input type...\n";
+	std::cout << "\e[1;31mUnknown input type..\n";
 }
