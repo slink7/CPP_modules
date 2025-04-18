@@ -16,6 +16,7 @@ WrongCat::~WrongCat() {
 WrongCat &WrongCat::operator=(const WrongCat &cpy)
 {
 	type = cpy.type;
+	return (*this);
 }
 
 // void	WrongCat::makeSound() const {
