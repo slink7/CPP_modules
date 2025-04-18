@@ -1,0 +1,14 @@
+#ifndef EASYFIND_TPP
+#define EASYFIND_TPP
+
+template<class T>
+typename T::const_iterator	easyfind(T& container, int target) {
+	int	index = 0;
+	for (typename T::const_iterator it = container.begin(); it != container.end(); ++it, ++index) {
+		if (*it == target)
+			return (it);
+	}
+	return (container.end());
+}
+
+#endif
