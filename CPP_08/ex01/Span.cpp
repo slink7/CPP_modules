@@ -50,7 +50,7 @@ void			Span::addNumber(int n) {
 unsigned int	Span::shortestSpan() {
 	if (_size < 2)
 		throw (std::range_error("Not enough elements in span!"));
-	// std::sort(_content.begin(), _content.end());
+	std::sort(_content.begin(), _content.end());
 	unsigned int shortest = 0x0FFFFFFFF;
 	for (unsigned int k = 0; k < _size - 1; k++) {
 		unsigned int	distance = _content[k + 1] - _content[k];

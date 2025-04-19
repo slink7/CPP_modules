@@ -33,7 +33,7 @@ private:
 
 template <class T>
 inline void Span::addRange(T begin, T end) {
-	if (end - begin > _size - _max_size)
+	if (_size + end - begin > _max_size)
 		throw (std::overflow_error("The Span has not enough place!"));
 	for (T it = begin; it != end; ++it) {
 		_content.push_back(*it);
