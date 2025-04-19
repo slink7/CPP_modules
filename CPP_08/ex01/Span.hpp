@@ -1,42 +1,41 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
-#include <cstring>
+#include <vector>
 #include <stdexcept>
+#include <algorithm>
 
 class Span {
 public:
 	Span();
 	Span(const Span& other);
-	Span(unsigned int len);
+	Span(unsigned int size);
 	~Span();
 
-	Span&		operator=(const Span& other);
-	int&		operator[](unsigned int index);
-	const int&	operator[](unsigned int index) const;
+	Span&	operator=(const Span& other);
 
 	unsigned int	size() const;
-	unsigned int	getAddIndex() const;
+	unsigned int	max_size() const;
+
 	void			addNumber(int n);
 	template<class T>
 	void			addRange(T begin, T end);
-
-	int				shortestSpan() const;
-	int				longestSpan() const;
-
+	unsigned int	shortestSpan();
+	unsigned int	longestSpan();
 
 private:
-	unsigned int	_length;
-	unsigned int	_add_index;
-	int				*_array;
+	unsigned int		_size;
+	unsigned int		_max_size;
+	std::vector<int>	_content;
 };
 
 #endif
 
 template <class T>
 inline void Span::addRange(T begin, T end) {
-	while (begin != end) {
-		addNumber(*begin);
-		begin++;
+	if (end - begin > _size - _max_size)
+		throw (std::overflow_error("The Span has not enough place!"));
+	for (std::vector<int>::const_iterator it = begin; it != end; ++it) {
+		_content.push_back(*it);
 	}
 }
