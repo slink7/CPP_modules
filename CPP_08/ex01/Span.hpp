@@ -35,7 +35,7 @@ template <class T>
 inline void Span::addRange(T begin, T end) {
 	if (end - begin > _size - _max_size)
 		throw (std::overflow_error("The Span has not enough place!"));
-	for (std::vector<int>::const_iterator it = begin; it != end; ++it) {
+	for (T it = begin; it != end; ++it) {
 		_content.push_back(*it);
 	}
 }
