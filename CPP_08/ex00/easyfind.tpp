@@ -11,4 +11,9 @@ typename T::const_iterator	easyfind(T& container, int target) {
 	return (container.end());
 }
 
+template<class T>
+typename T::const_iterator	easyfind2(T& container, int target) {
+	std::find(container.begin(), container.end(), target);
+}
+
 #endif
