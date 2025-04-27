@@ -12,7 +12,7 @@
 
 typedef std::map<std::string, float> Database;
 
-bool	loadDatabase(Database& out, const std::string& path);
-bool	lookupInDatabase(const Database& db, const std::string& date);
+bool	parseFile(Database &db, const std::string &path, void (*toDo)(Database&, std::string&, float&)) ;
+float	lookupInDatabase(const Database& db, const std::string& date);
 
 #endif
