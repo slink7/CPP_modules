@@ -11,9 +11,6 @@
 class ScalarConverter {
 public:
 	static void	convert(const std::string& scalar);
-
-private:
-	ScalarConverter();
 };
 
 #endif

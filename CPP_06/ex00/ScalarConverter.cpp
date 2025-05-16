@@ -145,7 +145,7 @@ void ScalarConverter::convert(const std::string &scalar) {
 		{ft::is_char, convertChar},
 		{ft::is_int, convertInt},
 		{ft::is_float, convertFloat},
-		{ft::is_double, convertDouble},
+		{ft::is_double, convertDouble}
 	};
 
 	for (int k = 0; k < 4; ++k) {
