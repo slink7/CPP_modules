@@ -5,8 +5,7 @@ NAME = a.out
 COMPILER = c++
 
 SRC = \
-	main.cpp\
-	Elements.cpp
+	main.cpp
 
 CFLAGS = -Wall -Werror -Wextra -g3 -std=c++98
 LFLAGS =
