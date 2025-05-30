@@ -80,5 +80,3 @@ int main(int argc, char **argv) {
 		std::cout << "Exception: " << e.what() << "\n";
 	}
 }
-
-// 5 1 2 + 4 * + 3 -
