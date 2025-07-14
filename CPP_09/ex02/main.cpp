@@ -23,7 +23,7 @@ template <class T>
 void fill(T& container, int argc, char **argv) {
 	for (int k = 0; k < argc; ++k) {
 		if (!ft::is_int(argv[k])) {
-			throw std::invalid_argument("Invalid argument: " + std::string(argv[k]));
+			throw std::invalid_argument("Invalid argument: \'" + std::string(argv[k]) + "\'");
 		}
 		container.push_back(std::atoi(argv[k]));
 	}
@@ -124,24 +124,112 @@ void merge_insert_sort(T& container, uint i = 1) {
 	
 }
 
+static void FillJacobsthal(int* out, int n) {
+	int a = 0, b = 1;
+
+	if (n > 0)
+		out[0] = a;
+	if (n > 1)
+		out[1] = b;
+	if (n < 2)
+		return ; 
+
+	for (int k = 2; k < n; k++) {
+		out[k] = 2 * a + b;
+		a = b;
+		b = out[k];
+	}
+}
+
+
+// static void jacobsthal(std::vector<int> &smaller, std::vector<int> &larger)
+// {
+//     std::vector<int>::iterator iterator;
+//     std::vector<int> jacobsthal = generate(smaller.size());
+//     std::vector<bool> isInserted(smaller.size(), false);
+
+//     // use jacobsthal pour inserer
+//     for (size_t i = 0; i < jacobsthal.size(); i++)
+//     {
+//         int index = jacobsthal[i];
+//         std::vector<int>::iterator pos = std::lower_bound(larger.begin(), larger.end(), smaller[index]);
+//         larger.insert(pos, smaller[index]);
+//         isInserted[index] = true;
+//     }
+//     // insere le reste
+//     for (size_t i = 0; i < smaller.size(); i++)
+//     {
+//         if(!isInserted[i])
+//         {
+//           iterator = std::lower_bound(larger.begin(), larger.end(), smaller[i]);
+//           larger.insert(iterator, smaller[i]);
+//         }
+//     }
+// }
+
+// static void fordJohnson(std::vector<int> &arg)
+// {
+//     std::vector<int> smaller;
+//     std::vector<int> larger;
+    
+//     if (arg.size() < 2)
+//     {
+//         return;
+//     }
+//     for (size_t i = 0; i < arg.size() - 1; i += 2)
+//     {
+//         if (arg[i] < arg[i + 1])
+//         {
+//             smaller.push_back(arg[i]);
+//             larger.push_back(arg[i + 1]);
+//         }
+//         else
+//         {
+//             smaller.push_back(arg[i + 1]);
+//             larger.push_back(arg[i]);
+//         }
+//     }
+//     if (arg.size() % 2 != 0)
+//     {
+//         larger.push_back(arg[arg.size() - 1]);
+//     }
+//     fordJohnson(larger);
+//     jacobsthal(smaller, larger);
+//     arg = larger;
+// }
+
 
 int main(int argc, char **argv) {
 
-	std::deque<int> l;
-	std::vector<int> v;
+	int jsn[100];
 
-	try {
-		fill(l, argc - 1, argv + 1);
-		fill(v, argc - 1, argv + 1);
-	} catch (const std::invalid_argument& e) {
-		std::cerr << e.what() << std::endl;
-		return (1);
+	FillJacobSthal(jsn, 100);
+	for (int k = 0; k < 100; k++) {
+		std::cout << "st " << k << ": " << jsn[k] << "\n";
 	}
 
+	// std::deque<int> l;
+	// std::vector<int> v;
+
+	// try {
+	// 	fill(l, argc - 1, argv + 1);
+	// 	fill(v, argc - 1, argv + 1);
+	// } catch (const std::invalid_argument& e) {
+	// 	std::cerr << "An exception occured: " << e.what() << std::endl;
+	// 	return (1);
+	// }
+
+	// // print_container(l);
+	// // swap_range(l, 1, 2, 4, 1);
+	
+	// std::cout << "Pre:\n";
+
 	// print_container(l);
-	// swap_range(l, 1, 2, 4, 1);
-	merge_insert_sort(l);
-	print_container(l);
+
+	// std::cout << "Post:\n";
+
+	// merge_insert_sort(l);
+	// print_container(l);
 	// try {
 
 	// } catch (std::exception& e) {
