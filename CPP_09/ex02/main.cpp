@@ -29,34 +29,34 @@ void fill(T& container, int argc, char **argv) {
 	}
 }
 
-template <class T>
-void	push_back_range(T& out, T& in, uint begin, uint end) {
-	// end = (end < in.size()) ? end : in.size();
-	for (uint k = begin; k < end; k++)
-		out.push_back(in.at(k));
-}
+// template <class T>
+// void	push_back_range(T& out, T& in, uint begin, uint end) {
+// 	// end = (end < in.size()) ? end : in.size();
+// 	for (uint k = begin; k < end; k++)
+// 		out.push_back(in.at(k));
+// }
 
-template <class T>
-void	swap_range(T& c, int begin_a, int count_a, int begin_b, int count_b) {
+// template <class T>
+// void	swap_range(T& c, int begin_a, int count_a, int begin_b, int count_b) {
 	
-	if ((begin_b > begin_a && begin_b < begin_a + count_a) || (begin_a > begin_b && begin_a < begin_b + count_b))
-		throw (std::invalid_argument("swap_range: ranges overlaps"));
+// 	if ((begin_b > begin_a && begin_b < begin_a + count_a) || (begin_a > begin_b && begin_a < begin_b + count_b))
+// 		throw (std::invalid_argument("swap_range: ranges overlaps"));
 	
-	if (begin_b < begin_a) {
-		std::swap(begin_a, begin_b);
-		std::swap(count_a, count_b);
-	}
+// 	if (begin_b < begin_a) {
+// 		std::swap(begin_a, begin_b);
+// 		std::swap(count_a, count_b);
+// 	}
 		
-	T out;
+// 	T out;
 
-	push_back_range(out, c, (0), (begin_a));
-	push_back_range(out, c, (begin_b), (begin_b + count_b));
-	push_back_range(out, c, (begin_a + count_a), (begin_b));
-	push_back_range(out, c, (begin_a), (begin_a + count_a));
-	push_back_range(out, c, (begin_b + count_b), c.size());
+// 	push_back_range(out, c, (0), (begin_a));
+// 	push_back_range(out, c, (begin_b), (begin_b + count_b));
+// 	push_back_range(out, c, (begin_a + count_a), (begin_b));
+// 	push_back_range(out, c, (begin_a), (begin_a + count_a));
+// 	push_back_range(out, c, (begin_b + count_b), c.size());
 
-	c = out;
-}
+// 	c = out;
+// }
 
 template <class T>
 void print_container(const T& container) {
@@ -66,79 +66,120 @@ void print_container(const T& container) {
 	std::cout << std::endl;
 }
 
-template <class T>
-void merge_insert_sort(T& container, uint i = 1) {
-	if (i < 1)
-		i = 1;
+// template <class T>
+// void merge_insert_sort(T& container, uint i = 1) {
+// 	if (i < 1)
+// 		i = 1;
 	
-	uint element_count = container.size() / i;
-	std::cout << "Elemc: " << element_count << " (" << i << ") \n";
-	if (element_count < 2)
-		return ;
+// 	uint element_count = container.size() / i;
+// 	std::cout << "Elemc: " << element_count << " (" << i << ") \n";
+// 	if (element_count < 2)
+// 		return ;
 	
-	int next_i = 2 * i;
-	// print_container(container);
-	for (uint k = 0; k < element_count; k += 2) {
-		uint index_a = i * (k + 1) - 1;
-		uint index_b = i * (k + 2) - 1;
+// 	int next_i = 2 * i;
+// 	// print_container(container);
+// 	for (uint k = 0; k < element_count; k += 2) {
+// 		uint index_a = i * (k + 1) - 1;
+// 		uint index_b = i * (k + 2) - 1;
 		
-		if (index_a >= container.size() || index_b >= container.size())
-			break ;
+// 		if (index_a >= container.size() || index_b >= container.size())
+// 			break ;
 
-		if (container[index_a] > container[index_b])
-			swap_range(container, k * i, i, (k + 1) * i, i);	
-	}
+// 		if (container[index_a] > container[index_b])
+// 			swap_range(container, k * i, i, (k + 1) * i, i);	
+// 	}
 
-	merge_insert_sort(container, next_i);
+// 	merge_insert_sort(container, next_i);
 
-	for (uint k = 0; k + 1 < element_count; k += 2) {
-		uint left = k * next_i;
-		uint mid = left + i;
-		uint right = left + next_i;
+// 	for (uint k = 0; k + 1 < element_count; k += 2) {
+// 		uint left = k * next_i;
+// 		uint mid = left + i;
+// 		uint right = left + next_i;
 
-		if (mid >= container.size())
-			break;
-		if (right > container.size())
-			right = container.size();
+// 		if (mid >= container.size())
+// 			break;
+// 		if (right > container.size())
+// 			right = container.size();
 
-		// Merge the two sorted ranges [left, mid) and [mid, right)
-		std::vector<typename T::value_type> merged;
-		uint i1 = left, i2 = mid;
-		while (i1 < mid && i2 < right) {
-			if (container[i1] < container[i2])
-				merged.push_back(container[i1++]);
-			else
-				merged.push_back(container[i2++]);
-		}
-		while (i1 < mid)
-			merged.push_back(container[i1++]);
-		while (i2 < right)
-			merged.push_back(container[i2++]);
+// 		// Merge the two sorted ranges [left, mid) and [mid, right)
+// 		std::vector<typename T::value_type> merged;
+// 		uint i1 = left, i2 = mid;
+// 		while (i1 < mid && i2 < right) {
+// 			if (container[i1] < container[i2])
+// 				merged.push_back(container[i1++]);
+// 			else
+// 				merged.push_back(container[i2++]);
+// 		}
+// 		while (i1 < mid)
+// 			merged.push_back(container[i1++]);
+// 		while (i2 < right)
+// 			merged.push_back(container[i2++]);
 
-		// Copy merged back to container
-		for (uint j = 0; j < merged.size(); ++j)
-			container[left + j] = merged[j];
-	}
+// 		// Copy merged back to container
+// 		for (uint j = 0; j < merged.size(); ++j)
+// 			container[left + j] = merged[j];
+// 	}
 
-	// typename T::iterator mid = container.begin();
+// 	// typename T::iterator mid = container.begin();
 	
+// }
+
+// static void FillJacobsthal(unsigned long* out, unsigned int n) {
+// 	unsigned long a = 0ul, b = 1ul;
+
+// 	if (n > 0)
+// 		out[0] = a;
+// 	// if (n > 1)
+// 	// 	out[1] = b;
+// 	if (n < 2)
+// 		return ; 
+
+// 	for (unsigned int k = 1; k < n; k++) {
+// 		out[k] = 2 * a + b;
+// 		a = b;
+// 		b = out[k];
+// 	}
+// }
+
+template <class T>
+void JacobstalMerge(T& smaller, T& larger) {
+	unsigned int jacobstal_numbers[] = { 0, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485, 178956971, 357913941, 715827883, 1431655765, 2863311531 };
+
+	for (unsigned int k = 0; smaller.size() > 0 && (jacobstal_numbers[k] - k) < smaller.size(); k++) {
+		typename T::iterator it = std::lower_bound(larger.begin(), larger.end(), smaller[jacobstal_numbers[k] - k]);
+		larger.insert(it, smaller[jacobstal_numbers[k] - k]);
+		smaller.erase(smaller.begin() + jacobstal_numbers[k] - k);
+	}
+
+	for (unsigned int k = 0; k < smaller.size(); k++) {
+		typename T::iterator it = std::lower_bound(larger.begin(), larger.end(), smaller[k]);
+		larger.insert(it, smaller[k]);
+	}
 }
 
-static void FillJacobsthal(int* out, int n) {
-	int a = 0, b = 1;
+template <class T>
+void FordJohnsonSort(T& container) {
+	T larger;
+	T smaller;
 
-	if (n > 0)
-		out[0] = a;
-	if (n > 1)
-		out[1] = b;
-	if (n < 2)
-		return ; 
+	if (container.size() < 2)
+		return ;
 
-	for (int k = 2; k < n; k++) {
-		out[k] = 2 * a + b;
-		a = b;
-		b = out[k];
+	for (unsigned int k = 0; k < container.size() / 2; k++) {
+		bool ordered = container[2 * k] < container[2 * k + 1];
+		smaller.push_back(container[2 * k + 1 - ordered]);
+		larger.push_back(container[2 * k + ordered]);
 	}
+	if (container.size() % 2)
+		larger.push_back(container[container.size() - 1]);
+	
+	FordJohnsonSort(larger);
+	JacobstalMerge(smaller, larger);
+
+	// std::cout << "===============\n";
+	// print_container(smaller);
+	// print_container(larger);
+	container = larger;
 }
 
 
@@ -198,15 +239,56 @@ static void FillJacobsthal(int* out, int n) {
 //     arg = larger;
 // }
 
+std::vector<int> generate(size_t n)
+{
+    std::vector<int> jacobsthal;
+   
+    if (n == 0)
+        return jacobsthal;
+    
+    size_t j0 = 0;
+    jacobsthal.push_back(j0);
+    
+    size_t j1 = 1;
+    if (j1 < n && (jacobsthal.empty() || j1 != (size_t)jacobsthal.back()))
+    {
+        jacobsthal.push_back(j1);
+    }
+
+    size_t jn = j1 + 2 * j0;
+    while (jn < n)
+    {
+        if (jacobsthal.empty() || jn != (size_t)jacobsthal.back())
+        {
+            jacobsthal.push_back(jn);
+        }
+        j0 = j1;
+        j1 = jn;
+        jn = j1 + 2 * j0;
+    }
+    return jacobsthal;
+}
 
 int main(int argc, char **argv) {
 
-	int jsn[100];
+	std::vector<int> v;
 
-	FillJacobSthal(jsn, 100);
-	for (int k = 0; k < 100; k++) {
-		std::cout << "st " << k << ": " << jsn[k] << "\n";
+	try {
+		fill(v, argc - 1, argv + 1);
+	} catch (std::exception& e) {
+		std::cerr << "An exception occured: " << e.what() << std::endl;
+	 	return (1);
 	}
+
+	std::cout << " A =========================\n";
+	print_container(v);
+	std::cout << " B =========================\n";
+	
+	FordJohnsonSort(v);
+	std::cout << " C =========================\n";
+	
+	print_container(v);
+	std::cout << " D =========================\n";
 
 	// std::deque<int> l;
 	// std::vector<int> v;
