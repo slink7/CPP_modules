@@ -1,5 +1,13 @@
 #include "Form.hpp"
 
+const char* Form::GradeTooHighException::what() const throw() {
+	return "The grade is too high!";
+}
+
+const char* Form::GradeTooLowException::what() const throw() { 
+	return "The grade is too low!";
+}
+
 Form::Form() :
 	_name("Juandre"),
 	_is_signed(false),
@@ -64,6 +72,6 @@ void Form::checkGrades() {
 }
 
 std::ostream &operator<<(std::ostream &os, const Form &form) {
-	os << "[" << (form.isSigned() ? "V" : "X") << "]" << form.getName();
+	os << "[" << (form.isSigned() ? "V" : "X") << "] " << form.getName();
     return os;
 }
