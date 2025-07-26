@@ -2,6 +2,7 @@
 #define SHRUBBERYCREATIONFORM_HPP
 
 #include <fstream>
+#include <stdlib.h>
 
 #include "AForm.hpp"
 

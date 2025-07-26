@@ -47,4 +47,6 @@ int main() {
 	robotonomoscotolopyTest();
 	
 	pardonTest();
+
+	std::cout << "\n";
 }

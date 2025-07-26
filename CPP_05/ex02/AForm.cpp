@@ -1,5 +1,13 @@
 #include "AForm.hpp"
 
+const char* AForm::GradeTooHighException::what() const throw() {
+	return "The grade is too high!";
+}
+
+const char* AForm::GradeTooLowException::what() const throw() { 
+	return "The grade is too low!";
+}
+
 AForm::AForm() :
 	_name("Juandre"),
 	_is_signed(false),
