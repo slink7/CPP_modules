@@ -84,7 +84,7 @@ void	convertChar(const std::string& input) {
 }
 
 void	convertInt(const std::string& input) {
-	float	f = atof(input.c_str());
+	double	f = atof(input.c_str());
 	int		i = atoi(input.c_str());
 
 	if (i < 0 || i > 127)
@@ -102,7 +102,7 @@ void	convertInt(const std::string& input) {
 }
 
 void	convertFloat(const std::string& input) {
-	float	f = atof(input.c_str());
+	double	f = atof(input.c_str());
 	char	c = static_cast<char>(f);
 
 	if (c < 0 || c > 127 || f == nanf(""))
@@ -120,7 +120,7 @@ void	convertFloat(const std::string& input) {
 }
 
 void	convertDouble(const std::string& input) {
-	float	d = atof(input.c_str());
+	double	d = atof(input.c_str());
 	char	c = static_cast<char>(d);
 
 	if (c < 0 || c > 127 || d == nan(""))
