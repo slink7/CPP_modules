@@ -3,6 +3,17 @@
 #define INT_MAXF 2147483647.0f
 #define INT_MINF -2147483648.0f
 
+ScalarConverter::ScalarConverter() {}
+ScalarConverter::ScalarConverter(const ScalarConverter& other) {
+	(void) other;
+}
+ScalarConverter::~ScalarConverter() {}
+
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) {
+	(void) other;
+	return (*this);
+}
+
 std::string StrTrim(const std::string &str, const std::string &set) {
 
 	std::size_t begin = str.find_first_not_of(set);
@@ -25,7 +36,8 @@ namespace ft {
 				input.at(input.length() - 1) == 'f' && (
 					input.find_last_of('-') == std::string::npos ||
 					input.find_last_of('-') == 0
-				)
+				) &&
+				input.find_first_of('.') == input.find_last_of('.')
 			)
 		);
 	}
@@ -37,7 +49,8 @@ namespace ft {
 				input.find('.') != std::string::npos && (
 					input.find_last_of('-') == std::string::npos ||
 					input.find_last_of('-') == 0 
-				)
+				) &&
+				input.find_first_of('.') == input.find_last_of('.')
 			)
 		);
 	}
