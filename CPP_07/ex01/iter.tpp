@@ -7,7 +7,7 @@ void	print(T& value) {
 }
 
 template<class T>
-void	iter(T* array, unsigned int array_length, void(*f)(T&)) {
+void	iter(T* array, const unsigned int array_length, void(*f)(T&)) {
 	for (unsigned int k = 0; k < array_length; ++k)
 		f(array[k]);
 }

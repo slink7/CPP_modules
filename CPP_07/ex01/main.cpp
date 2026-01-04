@@ -8,7 +8,7 @@ void	double_it(int& value) {
 	value *= 2;
 }
 
-void	shout_now(std::string& str) {
+void	shout_now(const std::string& str) {
 	for (unsigned long k = 0; k < str.length(); ++k) {
 		if (str[k] <= 'z' && str[k] >= 'a')
 			str[k] += 'A' - 'a';
