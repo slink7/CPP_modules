@@ -4,6 +4,7 @@
 #include "MutantStack.tpp"
 
 int main_enonce() {
+	std::cout << "TEST A\n";
 	MutantStack<int> mstack;
 	mstack.push(5);
 	mstack.push(17);
@@ -28,6 +29,7 @@ int main_enonce() {
 }
 
 void	test_de_moi_meme() {
+	std::cout << "TEST B\n";
 	MutantStack<int> stack;
 
 	stack.push(2);
