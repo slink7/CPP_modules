@@ -8,6 +8,8 @@ void	print(T& value) {
 	std::cout << value << "\n";
 }
 
+#define OOR_EXCEPTION "Index is out of range"
+
 template<class T>
 class Array {
 
@@ -37,6 +39,8 @@ public:
 	}
 
 	Array&	operator=(const Array& other) {
+		if (this == &other)
+			return (*this);
 		if (other.size() != size()) {
 			_length = other.size();
 			if (_array)
@@ -47,18 +51,19 @@ public:
 		for (unsigned int k = 0; k < size(); k++) {
 			(*this)[k] = other[k];
 		}
+
 		return (*this);
 	}
 
 	T&		operator[](unsigned int index) {
 		if (index >= size())
-			throw (std::out_of_range("index out of range"));
+			throw (std::out_of_range(OOR_EXCEPTION));
 		return (_array[index]);
 	}
 
 	const T&		operator[](unsigned int index) const {
 		if (index >= size())
-			throw (std::out_of_range("index out of range"));
+			throw (std::out_of_range(OOR_EXCEPTION));
 		return (_array[index]);
 	}
 

@@ -20,13 +20,11 @@ void	test_int() {
 
 	std::cout << "Print arr1\n";
 	arr1.iter(print);
+	
 	arr0[2] = 25;
 	arr1 = arr0;
-	
-	
-	
-	
 	arr0.iter(double_it);
+
 	std::cout << "Print arr0\n";
 	arr0.iter(print);
 	
