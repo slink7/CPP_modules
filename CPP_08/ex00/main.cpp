@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <algorithm>
 
 #include "easyfind.tpp"
 
@@ -49,7 +48,7 @@ void	test_list() {
 	vec.push_back(1);
 	vec.push_back(1);
 
-	std::list<int>::const_iterator found = easyfind(vec, 2);
+	std::list<int>::const_iterator found = easyfind(vec, 4);
 
 	if (found != vec.end())
 		std::cout << "Found: " << *found << "\n";

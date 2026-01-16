@@ -1,6 +1,8 @@
 #ifndef EASYFIND_TPP
 #define EASYFIND_TPP
 
+#include <algorithm>
+
 template<class T>
 typename T::const_iterator	easyfind(T& container, int target) {
 	return (std::find(container.begin(), container.end(), target));
