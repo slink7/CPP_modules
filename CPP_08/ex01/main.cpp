@@ -55,7 +55,7 @@ void	test_10k() {
 	Span span(size);
 	std::cout << "Filling " << size << " elements...\n";
 	for (unsigned int k = 0; k < size; k++) {
-		span.addNumber(rand());
+		span.addNumber(rand() % (10 * size));
 	}
 
 	std::cout << "Longest Span is:\n";
@@ -69,8 +69,8 @@ int main() {
 	
 	srand(time(0));
 
-	// test_10k();
-
+	test_10k();
+	test_addRange_excepetion();
 	test_too_small_span();
 
 }
