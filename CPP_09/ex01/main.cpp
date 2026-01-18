@@ -36,7 +36,7 @@ int	ReadStack(const std::string& calc) {
 		if (shouldBeSpace && *it != ' ') {
 			std::string e = "e";
 			e[0] = *it;
-			throw std::invalid_argument("Expected space instead of '" + e + "'\n");
+			throw std::invalid_argument("\e[1;31mExpected space instead of '" + e + "'\n");
 		}
 		if (*it == ' ') {
 			shouldBeSpace = false;
@@ -49,7 +49,7 @@ int	ReadStack(const std::string& calc) {
 			for (int k = 0; operator_map[k].key; ++k) {
 				if (operator_map[k].key == *it) {
 					if (stack.size() < 2)
-						throw std::invalid_argument("Syntax error");
+						throw std::invalid_argument("\e[1;31mSyntax error, missing operand");
 					int a = stack.top(); stack.pop();
 					int b = stack.top(); stack.pop();
 					int n = operator_map[k].op(a, b);
@@ -59,24 +59,26 @@ int	ReadStack(const std::string& calc) {
 		} else {
 			std::string e = "e";
 			e[0] = *it;
-			throw std::invalid_argument("Invalid char: '" + e + "'");
+			throw std::invalid_argument("\e[1;31mInvalid char: '" + e + "'");
 		}
 		shouldBeSpace = true;
 	}
 	if (stack.size() != 1)
-		throw std::invalid_argument("Syntax error");
+		throw std::invalid_argument("\e[1;31mSyntax error, missing operator");
 
 	return (stack.top());
 }
 
 int main(int argc, char **argv) {
 	
-	if (argc != 2)
+	if (argc != 2) {
+		std::cout << "\e[0;31mWrong argument count\n";
 		return (1);
+	}
 	try {
 		int result = ReadStack(argv[1]);
-		std::cout << argv[1] << " = " << result << "\n";
+		std::cout << "\e[0;36m" << argv[1] << "\e[0;37m = \e[1;36m" << result << "\n";
 	} catch (std::exception& e) {
-		std::cout << "Exception: " << e.what() << "\n";
+		std::cout << "\e[0;31mException: " << e.what() << "\n";
 	}
 }
