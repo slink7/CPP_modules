@@ -82,6 +82,7 @@ bool parseFile(Database &db, const std::string &path, void (*toDo)(Database&, st
 
 	std::string file_content;
 	readFileContent(file_content, file);
+	file_content = strTrim(file_content, " \t\n");
 
 	std::size_t line_start = 0ul;
 	std::size_t sep = 0ul;
