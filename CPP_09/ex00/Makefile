@@ -1,6 +1,6 @@
 #=== Project Config ===
 
-NAME = a.out
+NAME = btc
 
 COMPILER = c++
 

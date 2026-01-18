@@ -63,22 +63,22 @@ bool	isValue(const std::string& str, std::size_t pos = 0) {
 
 void getValues(std::string& key, float& value, const std::string& file_content, std::size_t line_start, std::size_t sep, std::size_t line_end) {
 	if (sep < line_start || sep > line_end || line_end < line_start)
-		throw (std::invalid_argument("Weird line formation \"" + file_content.substr(line_start, line_end - line_start) + "\""));
+		throw (std::invalid_argument("\e[1;31mWeird line formation \"" + file_content.substr(line_start, line_end - line_start) + "\""));
 	key = strTrim(file_content.substr(line_start, sep - line_start), " \t\n");
 	if (!isDate(key))
-		throw (std::invalid_argument("Key \"" + key + "\" is not a date"));
+		throw (std::invalid_argument("\e[1;31mKey \"" + key + "\" is not a date"));
 	if (!isDateValid(key))
-		throw (std::invalid_argument("Date \"" + key + "\" is not valid"));
+		throw (std::invalid_argument("\e[1;31mDate \"" + key + "\" is not valid"));
 	std::string valuestr = strTrim(file_content.substr(sep + 1, line_end - (sep + 1)), " \t\n");
 	if (!isValue(valuestr))
-		throw (std::invalid_argument("Value \"" + valuestr + "\" is not a valid number"));
+		throw (std::invalid_argument("\e[1;31mValue \"" + valuestr + "\" is not a valid number"));
 	value = ::atof(valuestr.c_str());
 }
 
 bool parseFile(Database &db, const std::string &path, void (*toDo)(Database&, std::string&, float&)) {
 	std::ifstream file(path.c_str());
 	if (!file.is_open())
-		throw (std::invalid_argument("Path \"" + path + "\" couldn't be openned."));
+		throw (std::invalid_argument("\e[1;31mPath \"" + path + "\" couldn't be openned."));
 
 	std::string file_content;
 	readFileContent(file_content, file);
@@ -93,13 +93,13 @@ bool parseFile(Database &db, const std::string &path, void (*toDo)(Database&, st
 	line_start = file_content.find('\n', 0) + 1;
 	sep = file_content.find_first_of(",|", line_start);
 	line_end = file_content.find('\n', line_start);
-	int k = 0;
+	int k = 2;
 	do {
 		try {
 			getValues(key, value, file_content, line_start, sep, line_end);
 			toDo(db, key, value);
 		} catch (std::exception& e) {
-			std::cout << "Caught an exception while parsing file (:" << k << "): " << e.what() << "\n";
+			std::cout << "\e[0;31mCaught an exception while parsing file (" << path << ":" << k << "): " << e.what() << "\n";
 		}
 		++k;
 		line_start = line_end + 1;
@@ -111,7 +111,7 @@ bool parseFile(Database &db, const std::string &path, void (*toDo)(Database&, st
 		getValues(key, value, file_content, line_start, sep, line_end);
 		toDo(db, key, value);
 	} catch (std::exception& e) {
-		std::cout << "Caught an exception while parsing file: " << e.what() << "\n";
+		std::cout << "\e[0;31mCaught an exception while parsing file: " << e.what() << "\n";
 	}
 
 	file.close();
@@ -124,5 +124,5 @@ float lookupInDatabase(const Database &db, const std::string &date) {
 			return (it->second);
 		}
 	}
-	throw (std::invalid_argument("No entry could be found!"));
+	throw (std::invalid_argument("\e[1;31mNo entry could be found!"));
 }
