@@ -52,7 +52,7 @@ int	ReadStack(const std::string& calc) {
 						throw std::invalid_argument("\e[1;31mSyntax error, missing operand");
 					int a = stack.top(); stack.pop();
 					int b = stack.top(); stack.pop();
-					int n = operator_map[k].op(a, b);
+					int n = operator_map[k].op(b, a);
 					stack.push(n);
 				}
 			}
